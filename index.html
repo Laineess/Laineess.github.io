@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlos González Laines — Portafolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+/* =============================================
+   VARIABLES Y RESET
+   ============================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#CC0000; --red2:#ff3333;
+  --yellow:#FFCB05; --yellow2:#ffe566;
+  --blue:#3B4CCA; --blue2:#6c84f0;
+  --dark:#0d0d1a; --dark2:#141428;
+  --panel:#1a1a35; --panel2:#22224a;
+  --border:#2e2e5a; --border2:#3e3e7a;
+  --green:#00c96e; --white:#f0f0ff;
+  --mono:rgba(255,255,255,0.55);
+  --pixel:'Press Start 2P',monospace;
+  --tech:'Share Tech Mono',monospace;
+  --body:'Rajdhani',sans-serif;
+}
+
+body{
+  background:var(--dark);
+  color:var(--white);
+  font-family:var(--body);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
+
+/* FONDO: grid + gradientes */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 40% at 20% 0%,rgba(38, 15, 167, 0.5) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 30% at 90% 100%,rgba(201, 10, 10, 0.555) 0%,transparent 50%),
+    repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.025) 39px,rgba(255,255,255,0.025) 40px),
+    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.025) 39px,rgba(255,255,255,0.025) 40px);
+}
+
+/* =============================================
+   LAYOUT
+   ============================================= */
+.wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 24px 80px;}
+
+/* =============================================
+   NAV
+   ============================================= */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 0;border-bottom:2px solid var(--border);margin-bottom:70px;
+  flex-wrap:wrap;gap:14px;position:sticky;top:0;
+  background:rgba(13,13,26,0.92);backdrop-filter:blur(8px);
+  z-index:100;margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px;
+}
+.logo{display:flex;align-items:center;gap:14px;}
+.pb{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(180deg,var(--red) 50%,#ffffff 50%);
+  border:3px solid var(--yellow);position:relative;flex-shrink:0;
+  animation:spin 5s linear infinite;
+}
+.pb::after{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:9px;height:9px;border-radius:50%;background:#eee;border:2px solid #111;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.logo-text{font-family:var(--pixel);font-size:10px;color:var(--yellow);line-height:1.7;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;}
+.nav-links a{
+  font-family:var(--pixel);font-size:8px;color:var(--mono);
+  padding:8px 10px;border:1px solid transparent;
+  cursor:pointer;transition:all .2s;text-decoration:none;
+}
+.nav-links a:hover{color:var(--yellow);border-color:rgba(255,203,5,0.4);background:rgba(255,203,5,0.06);}
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero{
+  display:grid;grid-template-columns:1fr 290px;
+  gap:48px;align-items:center;margin-bottom:90px;
+}
+.hero-badge{
+  font-family:var(--pixel);font-size:10px;color:var(--green);
+  background:rgba(0,201,110,0.1);border:1px solid var(--green);
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 14px;margin-bottom:22px;
+}
+.badge-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--green);
+  animation:pulse 1.5s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.hero-name{
+  font-family:var(--pixel);font-size:25px;line-height:1.9;
+  color:var(--yellow);margin-bottom:12px;
+  text-shadow:3px 3px 0 rgba(204,0,0,0.6);
+}
+.hero-role{
+  font-family:var(--body);font-size:18px;font-weight:600;
+  color:var(--blue2);letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:22px;
+}
+.hero-desc{
+  font-family:var(--body);font-size:16px;color:var(--mono);line-height:1.9;
+  margin-bottom:30px;padding-left:14px;border-left:3px solid var(--yellow);
+}
+.hero-desc strong{color:var(--yellow);font-weight:700;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* BOTONES */
+.btn-r{
+  font-family:var(--pixel);font-size:9px;
+  background:var(--red);color:var(--white);
+  border:2px solid var(--yellow);padding:12px 18px;
+  cursor:pointer;transition:all .15s;text-decoration:none;display:inline-block;
+}
+.btn-r:hover{background:var(--yellow);color:var(--dark);transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--red);}
+.btn-o{
+  font-family:var(--pixel);font-size:9px;
+  background:transparent;color:var(--yellow);
+  border:2px solid rgba(255,203,5,0.5);padding:12px 18px;
+  cursor:pointer;transition:all .15s;text-decoration:none;display:inline-block;
+}
+.btn-o:hover{border-color:var(--yellow);background:rgba(255,203,5,0.1);transform:translate(-2px,-2px);}
+
+/* TRAINER CARD */
+.tcard{
+  background:linear-gradient(160deg,var(--panel2),var(--panel));
+  border:2px solid var(--border);position:relative;overflow:hidden;
+}
+.tcard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--red),var(--yellow),var(--blue));
+}
+.tcard-top{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--red) 100%);
+  padding:28px 20px 20px;text-align:center;position:relative;overflow:hidden;
+}
+.tcard-top::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,0.08) 6px,rgba(0,0,0,0.08) 7px);
+}
+.avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(0,0,0,0.4);border:3px solid var(--yellow);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;margin:0 auto 10px;position:relative;z-index:1;
+}
+.tcard-name{font-family:var(--pixel);font-size:9px;color:var(--yellow);position:relative;z-index:1;}
+.tcard-body{padding:16px 20px;}
+.trow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.tlabel{font-family:var(--tech);font-size:10px;color:var(--mono);letter-spacing:1px;}
+.tval{font-family:var(--body);font-size:14px;font-weight:700;color:var(--white);}
+.divider{height:1px;background:var(--border);margin:10px 0;}
+.stat-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.sname{font-family:var(--tech);font-size:9px;color:var(--mono);width:44px;}
+.sbar{flex:1;height:6px;background:rgba(0,0,0,0.5);border:1px solid var(--border);overflow:hidden;}
+.sfill{height:100%;animation:fill 1.8s ease-out forwards;}
+@keyframes fill{from{width:0}}
+.snum{font-family:var(--tech);font-size:9px;color:var(--yellow);width:24px;text-align:right;}
+.tcard-id{
+  font-family:var(--tech);font-size:12px;color:rgb(255, 255, 255);
+  padding:10px 20px;border-top:1px solid var(--border);letter-spacing:2px;
+}
+
+/* =============================================
+   SECTIONS
+   ============================================= */
+.section{margin-bottom:90px;}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+.sec-n{
+  font-family:var(--pixel);font-size:7px;color:var(--red);
+  border:1px solid var(--red);background:rgba(204,0,0,0.1);
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.sec-t{font-family:var(--pixel);font-size:10px;color:var(--yellow);line-height:1.7;}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,203,5,0.5),transparent);}
+
+/* =============================================
+   ABOUT
+   ============================================= */
+.about-box{
+  background:var(--panel);border:1px solid var(--border);padding:36px;position:relative;
+}
+.about-box::before{
+  content:'▶';font-family:var(--pixel);font-size:8px;color:var(--yellow);
+  position:absolute;top:16px;left:16px;opacity:.5;
+}
+.dialogue{
+  font-family:var(--body);font-size:17px;color:rgba(255,255,255,0.8);
+  line-height:1.9;padding-left:8px;
+}
+.dialogue em{color:var(--yellow);font-style:normal;font-weight:700;}
+.cursor{
+  display:inline-block;width:9px;height:15px;background:var(--yellow);
+  margin-left:3px;vertical-align:middle;animation:blink .8s step-end infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+/* =============================================
+   SKILLS — logos SVG reales via CDN
+   ============================================= */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
+.sk{
+  background:var(--panel);border:1px solid var(--border);
+  padding:16px 10px;text-align:center;cursor:default;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.sk::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.sk.sl::before{background:var(--blue2);}
+.sk.sa::before{background:var(--yellow);}
+.sk.st::before{background:var(--green);}
+.sk.sd::before{background:var(--red2);}
+.sk.so::before{background:rgb(255, 0, 212);}
+.sk:hover{border-color:var(--yellow);transform:translateY(-3px);background:var(--panel2);}
+.sk-logo{
+  width:40px;height:40px;margin:0 auto 10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.sk-logo img{width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 0 4px rgba(255,203,5,0.25));}
+.sk-name{font-family:var(--pixel);font-size:10px;color:var(--white);margin-bottom:6px;line-height:1.7;}
+.sk-tag{font-family:var(--tech);font-size:9px;padding:2px 8px;display:inline-block;}
+.sl .sk-tag{background:rgba(59,76,202,0.3);color:#9ab0ff;border:1px solid rgba(108,132,240,0.5);}
+.sa .sk-tag{background:rgba(255,203,5,0.15);color:var(--yellow);border:1px solid rgba(255,203,5,0.4);}
+.st .sk-tag{background:rgba(0,201,110,0.15);color:var(--green);border:1px solid rgba(0,201,110,0.4);}
+.sd .sk-tag{background:rgba(255,51,51,0.15);color:#ff8888;border:1px solid rgba(255,51,51,0.4);}
+.so .sk-tag{background:rgba(255, 0, 212, 0.3);color:#fbff00;border:1px solid rgba(255, 0, 221, 0.541);}
+
+/* =============================================
+   PROYECTOS
+   ============================================= */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
+.proj-card{
+  background:var(--panel);border:1px solid var(--border);
+  padding:28px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+  text-decoration:none;color:inherit;display:block;
+}
+.proj-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--yellow));
+  transform:scaleX(0);transition:transform .3s;transform-origin:left;
+}
+.proj-card:hover::after{transform:scaleX(1);}
+.proj-card:hover{
+  border-color:var(--yellow);transform:translate(-2px,-4px);
+  box-shadow:4px 6px 0 rgba(204,0,0,0.35);background:var(--panel2);
+}
+.proj-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.proj-num{font-family:var(--tech);font-size:15px;color:var(--red2);}
+.proj-badge{
+  font-family:var(--pixel);font-size:8px;padding:4px 10px;
+  background:rgba(0,201,110,0.15);color:var(--green);border:1px solid rgba(0,201,110,0.4);
+}
+.proj-badge.wip{background:rgba(255,203,5,0.1);color:var(--yellow);border-color:rgba(255,203,5,0.3);}
+.proj-icon-wrap{margin-bottom:14px;}
+.proj-icon-wrap img{width:56px;height:56px;object-fit:contain;border-radius:8px;}
+.proj-icon-fallback{
+  width:56px;height:56px;background:var(--panel2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:28px;border-radius:8px;
+}
+.proj-title{
+  font-family:var(--pixel);font-size:10px;color:var(--yellow);
+  margin-bottom:12px;line-height:1.8;
+}
+.proj-desc{
+  font-family:var(--body);font-size:14px;color:var(--mono);
+  line-height:1.75;margin-bottom:18px;
+}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.proj-tag{
+  font-family:var(--tech);font-size:9px;
+  background:rgba(59,76,202,0.25);color:#9ab0ff;
+  border:1px solid rgba(108,132,240,0.4);padding:3px 9px;
+}
+.proj-link{
+  font-family:var(--pixel);font-size:8px;color:var(--blue2);
+  display:inline-flex;align-items:center;gap:6px;
+  border-bottom:1px solid rgba(108,132,240,0.3);padding-bottom:2px;
+}
+
+/* =============================================
+   CONTACTO
+   ============================================= */
+.contact-box{
+  background:var(--panel);
+  border-top:3px solid var(--yellow);border-bottom:3px solid var(--yellow);
+  padding:52px 40px;text-align:center;position:relative;overflow:hidden;
+}
+.contact-box::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(59,76,202,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.ct-title{font-family:var(--pixel);font-size:13px;color:var(--yellow);line-height:1.9;margin-bottom:10px;}
+.ct-sub{font-family:var(--body);font-size:19px;color:var(--mono);font-weight:600;letter-spacing:2px;margin-bottom:36px;}
+.ct-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer{
+  border-top:1px solid var(--border);padding-top:28px;margin-top:52px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.ft{font-family:var(--tech);font-size:10px;color:rgba(255,255,255,0.25);line-height:1.9;letter-spacing:1px;}
+.balls{display:flex;gap:8px;align-items:center;}
+.ball{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,203,5,0.4);}
+.ball:nth-child(1){background:linear-gradient(180deg,var(--red) 50%,#111 50%);}
+.ball:nth-child(2){background:linear-gradient(180deg,var(--blue) 50%,#111 50%);}
+.ball:nth-child(3){background:linear-gradient(180deg,#666 50%,#111 50%);}
+
+/* =============================================
+   REVEAL ANIMATION
+   ============================================= */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.on{opacity:1;transform:none;}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media(max-width:680px){
+  .hero{grid-template-columns:1fr;}
+  .tcard{display:none;}
+  .hero-name{font-size:12px;}
+  .contact-box{padding:32px 20px;}
+  .ct-title{font-size:9px;}
+  .skill-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));}
+  .proj-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ==================== NAV ==================== -->
+<nav>
+  <div class="logo">
+    <div class="pb"></div>
+    <div class="logo-text">CARLOS G.L.<br>PORTFOLIO</div>
+  </div>
+  <div class="nav-links">
+    <a href="#about">SOBRE MÍ</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#projects">PROYECTOS</a>
+    <a href="#contact">CONTACTO</a>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div>
+    <div class="hero-badge"><span class="badge-dot"></span> DISPONIBLE PARA PROYECTOS</div>
+    <h1 class="hero-name">CARLOS<br>GONZÁLEZ<br>LAINES</h1>
+    <p class="hero-role">Ingeniero de Software · IA · Desarrollo web</p>
+    <p class="hero-desc">
+      <strong>Ingeniero de Software</strong> enfocado en
+      <strong>Inteligencia Artificial</strong> y desarrollo web.
+      Construyo soluciones que conectan código con el futuro.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-r" href="#projects">▶ PROYECTOS</a>
+      <a class="btn-o" href="#contact">◉ CONTACTO</a>
+    </div>
+  </div>
+
+  <!-- TRAINER CARD -->
+  <div class="tcard">
+    <div class="tcard-top">
+      <div class="avatar">👨‍💻</div>
+      <div class="tcard-name">LAIN.DEV</div>
+    </div>
+    <div class="tcard-body">
+      <div class="trow"><span class="tlabel">UBICACIÓN</span><span class="tval">Toluca, MX</span></div>
+      <div class="trow"><span class="tlabel">ESPECIALIDAD</span><span class="tval">Backend &amp; Desarrollo web</span></div>
+      <div class="trow"><span class="tlabel">NIVEL</span><span class="tval">⭐ AVANZADO</span></div>
+      <div class="divider"></div>
+      <div class="stat-row">
+        <span class="sname">CÓDIGO</span>
+        <div class="sbar"><div class="sfill" style="width:92%;background:var(--blue2)"></div></div>
+        <span class="snum">92</span>
+      </div>
+      <div class="stat-row">
+        <span class="sname">IA</span>
+        <div class="sbar"><div class="sfill" style="width:89%;background:var(--yellow)"></div></div>
+        <span class="snum">90</span>
+      </div>
+      <div class="stat-row">
+        <span class="sname">AUTOM.</span>
+        <div class="sbar"><div class="sfill" style="width:85%;background:var(--green)"></div></div>
+        <span class="snum">85</span>
+      </div>
+      <div class="stat-row">
+        <span class="sname">DATOS</span>
+        <div class="sbar"><div class="sfill" style="width:78%;background:var(--red2)"></div></div>
+        <span class="snum">78</span>
+      </div>
+    </div>
+    <div class="tcard-id">ID #CGL·001 · TRAINER LVL 150</div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="section reveal" id="about">
+  <div class="sec-head">
+    <div class="sec-n">01</div>
+    <h2 class="sec-t">SOBRE MÍ</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-box">
+    <p class="dialogue">
+      Soy <em>Carlos González Laines</em>, ingeniero de software con pasión por la
+      <em>Inteligencia Artificial</em> y el <em>desarrollo web</em>.
+      Me especializo en construir soluciones tecnológicas que combinan programación
+      tradicional con herramientas modernas de IA. Siempre estoy explorando
+      nuevas tecnologías para resolver problemas del mundo real de forma más eficiente,
+      inteligente y escalable.<span class="cursor"></span>
+    </p>
+  </div>
+</section>
+
+<!-- ==================== SKILLS ==================== -->
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  PARA EDITAR SKILLS:                                         ║
+  ║  Cada .sk tiene clase de tipo: sl=lenguaje sa=IA             ║
+  ║                                st=herramienta sd=datos       ║
+  ║  Cambia el src del <img> por cualquier logo en:              ║
+  ║  https://cdn.jsdelivr.net/gh/devicons/devicon/icons/         ║
+  ║  Ejemplo: python/python-original.svg                         ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section class="section reveal" id="skills">
+  <div class="sec-head">
+    <div class="sec-n">02</div>
+    <h2 class="sec-t">HABILIDADES</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <!-- Leyenda de tipos -->
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center;">
+    <span style="font-family:var(--tech);font-size:11px;color:var(--mono);letter-spacing:1px;">TIPO:</span>
+    <span style="font-family:var(--tech);font-size:11px;padding:3px 10px;background:rgba(59,76,202,0.2);color:#9ab0ff;border:1px solid rgba(108,132,240,0.4);">LENGUAJE</span>
+    <span style="font-family:var(--tech);font-size:11px;padding:3px 10px;background:rgba(255,203,5,0.12);color:var(--yellow);border:1px solid rgba(255,203,5,0.35);">IA</span>
+    <span style="font-family:var(--tech);font-size:11px;padding:3px 10px;background:rgba(0,201,110,0.12);color:var(--green);border:1px solid rgba(0,201,110,0.35);">HERRAMIENTA</span>
+    <span style="font-family:var(--tech);font-size:11px;padding:3px 10px;background:rgba(255,51,51,0.12);color:#ff8888;border:1px solid rgba(255,51,51,0.35);">DATOS</span>
+    <span style="font-family:var(--tech);font-size:11px;padding:3px 10px;background:rgba(215, 29, 252, 0.356);color:#c8ff00;border:1px solid rgba(255, 0, 212, 0.623);">OS</span>
+  </div>
+
+  <div class="skill-grid">
+
+    <!-- LENGUAJES -->
+    <div class="sk sl">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
+      <div class="sk-name">PYTHON</div><span class="sk-tag">LENGUAJE</span>
+    </div>
+    <div class="sk sl">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"></div>
+      <div class="sk-name">C++</div><span class="sk-tag">LENGUAJE</span>
+    </div>
+    <div class="sk sl">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"></div>
+      <div class="sk-name">C#</div><span class="sk-tag">LENGUAJE</span>
+    </div>
+    <div class="sk sl">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"></div>
+      <div class="sk-name">HTML</div><span class="sk-tag">LENGUAJE</span>
+    </div>
+    <div class="sk sl">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"></div>
+      <div class="sk-name">CSS</div><span class="sk-tag">LENGUAJE</span>
+    </div>
+    <div class="sk sl">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
+      <div class="sk-name">JAVA</div><span class="sk-tag">LENGUAJE</span>
+    </div>
+
+    <!-- DATOS -->
+    <div class="sk sd">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL"></div>
+      <div class="sk-name">SQL</div><span class="sk-tag">DATOS</span>
+    </div>
+    <div class="sk so">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"></div>
+      <div class="sk-name">Linux</div><span class="sk-tag">OS</span>
+    </div>
+    <div class="sk sd">
+      <!-- Power BI no tiene ícono en devicons, usamos SVG inline -->
+      <div class="sk-logo">
+        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="18" width="8" height="20" rx="1" fill="#F2C811"/>
+          <rect x="14" y="10" width="8" height="28" rx="1" fill="#F2C811" opacity=".85"/>
+          <rect x="26" y="2" width="8" height="36" rx="1" fill="#F2C811" opacity=".65"/>
+        </svg>
+      </div>
+      <div class="sk-name">POWER BI</div><span class="sk-tag">DATOS</span>
+    </div>
+
+    <!-- IA -->
+    <div class="sk sa">
+      <!-- Claude: Anthropic logo aproximado -->
+      <div class="sk-logo">
+        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" fill="#CC785C"/>
+          <text x="20" y="26" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="serif">C</text>
+        </svg>
+      </div>
+      <div class="sk-name">CLAUDE CODE</div><span class="sk-tag">IA</span>
+    </div>
+    <div class="sk sa">
+      <!-- Gemini logo -->
+      <div class="sk-logo">
+        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gGem" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4285F4"/>
+              <stop offset="100%" stop-color="#A259FF"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 4 C20 4 24 14 36 20 C24 26 20 36 20 36 C20 36 16 26 4 20 C16 14 20 4 20 4Z" fill="url(#gGem)"/>
+        </svg>
+      </div>
+      <div class="sk-name">GEMINI</div><span class="sk-tag">IA</span>
+    </div>
+    <div class="sk sa">
+      <!-- ChatGPT logo -->
+      <div class="sk-logo">
+        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" fill="#10A37F"/>
+          <path d="M20 10 C14 10 10 14 10 20 C10 23 11.5 25.5 14 27 L13 30 L17 28 C18 28.4 19 28.5 20 28.5 C26 28.5 30 24.5 30 20 C30 14 26 10 20 10Z" fill="white" opacity=".9"/>
+        </svg>
+      </div>
+      <div class="sk-name">CHAT GPT</div><span class="sk-tag">IA</span>
+    </div>
+
+    <!-- HERRAMIENTAS -->
+    <div class="sk st">
+      <!-- N8N logo -->
+      <div class="sk-logo">
+        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="#EA4B71"/>
+          <text x="20" y="27" text-anchor="middle" font-size="13" font-weight="bold" fill="white" font-family="monospace">n8n</text>
+        </svg>
+      </div>
+      <div class="sk-name">N8N</div><span class="sk-tag">HERRAMIENTA</span>
+    </div>
+
+    <div class="sk st">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
+      <div class="sk-name">Git</div><span class="sk-tag">Herramienta</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROYECTOS ==================== -->
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  PARA AGREGAR UN PROYECTO:                                   ║
+  ║  Copia un bloque <a class="proj-card"> ... </a>              ║
+  ║  Actualiza: href, proj-num, título, descripción,             ║
+  ║  tags y el badge (PRODUCCIÓN / EN DESARROLLO).               ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<section class="section reveal" id="projects">
+  <div class="sec-head">
+    <div class="sec-n">03</div>
+    <h2 class="sec-t">PROYECTOS</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="proj-grid">
+
+    <!-- PROYECTO 1: Instituto Kambes -->
+    <a class="proj-card" href="https://institutokambes.com" target="_blank" rel="noopener">
+      <div class="proj-top">
+        <span class="proj-num">#001</span>
+        <span class="proj-badge">✦ PRODUCCIÓN</span>
+      </div>
+      <div class="proj-icon-wrap">
+        <!-- Puedes reemplazar este src por el logo real del sitio -->
+        <div class="proj-icon-fallback">🎓</div>
+      </div>
+      <h3 class="proj-title">INSTITUTO KAMBES</h3>
+      <p class="proj-desc">
+        Sitio web institucional en producción para el Instituto Kambes. Plataforma educativa con información académica, oferta de programas y presencia digital completa para la institución.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML</span>
+        <span class="proj-tag">CSS</span>
+        <span class="proj-tag">WEB</span>
+      </div>
+      <span class="proj-link">↗ institutokambes.com</span>
+    </a>
+
+    <!-- PROYECTO 2: Autocompletado de Constancias -->
+    <a class="proj-card" href="https://github.com/Laineess/Autocompletado_De_Constancias" target="_blank" rel="noopener">
+      <div class="proj-top">
+        <span class="proj-num">#002</span>
+        <span class="proj-badge wip">⌥ GITHUB</span>
+      </div>
+      <div class="proj-icon-wrap">
+        <div class="proj-icon-fallback">📄</div>
+      </div>
+      <h3 class="proj-title">AUTOCOMPLETADO DE CONSTANCIAS</h3>
+      <p class="proj-desc">
+        Programa de apoyo para control escolar de la UAEMex que auto-rellena constancias de alumnos usando procesamiento de texto con Python. Automatiza tareas administrativas repetitivas.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">PYTHON</span>
+        <span class="proj-tag">NLP</span>
+        <span class="proj-tag">AUTOMATIZACIÓN</span>
+      </div>
+      <span class="proj-link">↗ Ver en GitHub</span>
+    </a>
+
+    <!-- PROYECTO 3: ControlKambes -->
+    <a class="proj-card" href="https://github.com/Laineess/ControlKambes" target="_blank" rel="noopener">
+      <div class="proj-top">
+        <span class="proj-num">#003</span>
+        <span class="proj-badge wip">⌥ GITHUB</span>
+      </div>
+      <div class="proj-icon-wrap">
+        <div class="proj-icon-fallback">🏫</div>
+      </div>
+      <h3 class="proj-title">CONTROL KAMBES</h3>
+      <p class="proj-desc">
+        Portal de control escolar diseñado para universidades particulares. Sistema de gestión académica que centraliza el control administrativo y escolar de la institución.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">WEB</span>
+        <span class="proj-tag">GESTIÓN</span>
+        <span class="proj-tag">EDUCACIÓN</span>
+      </div>
+      <span class="proj-link">↗ Ver en GitHub</span>
+    </a>
+
+    <!--
+      ╔══════════════════════════════════════╗
+      ║  AGREGA MÁS PROYECTOS AQUÍ ABAJO     ║
+      ║  Copia el bloque <a class="proj-card"> ║
+      ╚══════════════════════════════════════╝
+
+    <a class="proj-card" href="TU_URL" target="_blank" rel="noopener">
+      <div class="proj-top">
+        <span class="proj-num">#004</span>
+        <span class="proj-badge">✦ PRODUCCIÓN</span>
+      </div>
+      <div class="proj-icon-wrap">
+        <div class="proj-icon-fallback">🤖</div>
+      </div>
+      <h3 class="proj-title">NOMBRE DEL PROYECTO</h3>
+      <p class="proj-desc">Descripción del proyecto aquí.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">PYTHON</span>
+        <span class="proj-tag">IA</span>
+      </div>
+      <span class="proj-link">↗ Ver proyecto</span>
+    </a>
+    -->
+
+  </div>
+</section>
+
+<!-- ==================== CONTACTO ==================== -->
+<!--
+  ╔══════════════════════════════════════════╗
+  ║  EDITA TUS LINKS DE CONTACTO AQUÍ:       ║
+  ║  Cambia href="mailto:..." por tu email   ║
+  ║  Cambia los href de GitHub y LinkedIn    ║
+  ╚══════════════════════════════════════════╝
+-->
+<section class="section reveal" id="contact">
+  <div class="sec-head">
+    <div class="sec-n">04</div>
+    <h2 class="sec-t">CONTACTO</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="contact-box">
+    <h2 class="ct-title">¿LISTO PARA<br>COLABORAR?</h2>
+    <p class="ct-sub">Elige a Carlos como tu desarrollador</p>
+    <div class="ct-links">
+      <!-- ↓ Cambia por tu email real -->
+      <a class="btn-r" href="mailto:carlosg93918@gmail.com">◉ EMAIL</a>
+      <!-- ↓ Cambia por tu URL de GitHub -->
+      <a class="btn-o" href="https://github.com/Laineess" target="_blank" rel="noopener">⌥ GITHUB</a>
+      <!-- ↓ Cambia por tu URL de LinkedIn -->
+      <a class="btn-o" href="https://www.linkedin.com/in/carlos-gonz%C3%A1lez-laines-undefined-09527a284/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BWaZIic7jSf2%2FSm6jUGVBBA%3D%3D" target="_blank" rel="noopener">◈ LINKEDIN</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="ft">
+    © 2025 CARLOS GONZÁLEZ LAINES · ALL RIGHTS RESERVED<br>
+    BUILT WITH ♥ CODE &amp; CAFFEINE
+  </div>
+  <div class="balls">
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+  </div>
+</footer>
+
+</div><!-- /.wrap -->
+
+<script>
+/* Reveal on scroll */
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Fallback: si un logo SVG/img falla en cargar, mantener fallback silencioso */
+document.querySelectorAll('.sk-logo img').forEach(img => {
+  img.onerror = function(){ this.style.display='none'; };
+});
+</script>
+</body>
+</html>
