@@ -1,0 +1,11 @@
+# Normaliza finales de linea en LF para todos los archivos de texto
+* text=auto eol=lf
+
+# Imagenes: nunca deben ser convertidas
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.svg  text eol=lf
