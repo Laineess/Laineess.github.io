@@ -158,23 +158,22 @@ nav{
 }
 .tcard-top{
   background:linear-gradient(135deg,var(--blue) 0%,var(--red) 100%);
-  padding:28px 20px 20px;text-align:center;position:relative;overflow:hidden;
+  padding:0;text-align:center;position:relative;overflow:hidden;
 }
 .tcard-top::after{
-  content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,0.08) 6px,rgba(0,0,0,0.08) 7px);
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,0.10) 6px,rgba(0,0,0,0.10) 7px);
 }
 .avatar{
-  width:104px;height:104px;border-radius:50%;
+  width:100%;height:172px;border-radius:0;
   background:linear-gradient(135deg,var(--blue) 0%,var(--red) 100%);
-  border:3px solid var(--yellow);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 10px;position:relative;z-index:1;
-  overflow:hidden;box-shadow:0 0 0 4px rgba(13,13,26,0.5);
+  border:0;border-bottom:3px solid var(--yellow);
+  display:block;position:relative;z-index:1;
+  overflow:hidden;box-shadow:none;
 }
-.avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;display:block;position:relative;z-index:1;}
+.avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 65%;display:block;position:relative;z-index:1;}
 .avatar .ic{width:40px;height:40px;color:rgba(255,255,255,0.7);position:absolute;z-index:0;}
-.tcard-name{font-family:var(--pixel);font-size:9px;color:var(--yellow);position:relative;z-index:1;}
+.tcard-name{font-family:var(--pixel);font-size:9px;color:var(--yellow);position:relative;z-index:1;padding:12px 0 18px;}
 .tcard-body{padding:16px 20px;}
 .trow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
 .tlabel{font-family:var(--tech);font-size:10px;color:var(--mono);letter-spacing:1px;}
@@ -280,7 +279,7 @@ nav{
 }
 .car-btn:hover{border-color:var(--yellow);background:rgba(255,203,5,0.1);transform:translateY(-2px);}
 .car-btn .ic{width:15px;height:15px;}
-.car-dots{display:flex;gap:9px;align-items:center;}
+.car-dots{display:flex;gap:9px;align-items:center;justify-content:center;flex-wrap:wrap;}
 .dot{
   width:11px;height:11px;padding:0;cursor:pointer;transition:all .2s;
   background:var(--border);border:1px solid var(--border2);
@@ -290,6 +289,15 @@ nav{
 .car-count{
   font-family:var(--tech);font-size:12px;color:var(--mono);
   letter-spacing:2px;min-width:66px;text-align:center;
+}
+/* En pantallas angostas: flechas + contador en una sola fila, puntos aparte */
+@media(max-width:680px){
+  .car-bar{gap:14px 12px;}
+  .car-btn[data-prev]{order:1;}
+  .car-count{order:2;flex:1 1 auto;min-width:0;}
+  .car-btn[data-next]{order:3;}
+  .car-dots{order:4;flex:0 0 100%;gap:8px;}
+  .dot{width:10px;height:10px;}
 }
 
 .proj-card{
@@ -468,7 +476,7 @@ footer{
           <img src="assets/img/yo-480.jpg" alt="Foto de Carlos González Laines" width="480" height="480">
         </picture>
       </div>
-      <div class="tcard-name">LAIN.DEV</div>
+      <div class="tcard-name">LAINEESS</div>
     </div>
     <div class="tcard-body">
       <div class="trow"><span class="tlabel">UBICACIÓN</span><span class="tval">Toluca, MX</span></div>
@@ -559,10 +567,6 @@ footer{
       <div class="sk-name">C++</div><span class="sk-tag">LENGUAJE</span>
     </div>
     <div class="sk sl">
-      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"></div>
-      <div class="sk-name">C#</div><span class="sk-tag">LENGUAJE</span>
-    </div>
-    <div class="sk sl">
       <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"></div>
       <div class="sk-name">HTML</div><span class="sk-tag">LENGUAJE</span>
     </div>
@@ -571,8 +575,8 @@ footer{
       <div class="sk-name">CSS</div><span class="sk-tag">LENGUAJE</span>
     </div>
     <div class="sk sl">
-      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
-      <div class="sk-name">JAVA</div><span class="sk-tag">LENGUAJE</span>
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
+      <div class="sk-name">JAVASCRIPT</div><span class="sk-tag">LENGUAJE</span>
     </div>
 
     <!-- DATOS -->
@@ -585,55 +589,54 @@ footer{
       <div class="sk-name">Linux</div><span class="sk-tag">OS</span>
     </div>
     <div class="sk sd">
-      <!-- Power BI no tiene ícono en devicons, usamos SVG inline -->
+      <!-- Microsoft Excel (simple-icons) -->
       <div class="sk-logo">
-        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="18" width="8" height="20" rx="1" fill="#F2C811"/>
-          <rect x="14" y="10" width="8" height="28" rx="1" fill="#F2C811" opacity=".85"/>
-          <rect x="26" y="2" width="8" height="36" rx="1" fill="#F2C811" opacity=".65"/>
+        <svg viewBox="0 0 24 24" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#217346" d="M23 1.5q.41 0 .7.3q.3.29.3.7v19q0 .41-.3.7q-.29.3-.7.3H7q-.41 0-.7-.3q-.3-.29-.3-.7V18H1q-.41 0-.7-.3q-.3-.29-.3-.7V7q0-.41.3-.7Q.58 6 1 6h5V2.5q0-.41.3-.7q.29-.3.7-.3zM6 13.28l1.42 2.66h2.14l-2.38-3.87l2.34-3.8H7.46l-1.3 2.4l-.05.08l-.04.09l-.64-1.28l-.66-1.29H2.59l2.27 3.82l-2.48 3.85h2.16zM14.25 21v-3H7.5v3zm0-4.5v-3.75H12v3.75zm0-5.25V7.5H12v3.75zm0-5.25V3H7.5v3zm8.25 15v-3h-6.75v3zm0-4.5v-3.75h-6.75v3.75zm0-5.25V7.5h-6.75v3.75zm0-5.25V3h-6.75v3Z"/>
         </svg>
       </div>
-      <div class="sk-name">POWER BI</div><span class="sk-tag">DATOS</span>
+      <div class="sk-name">EXCEL</div><span class="sk-tag">DATOS</span>
     </div>
 
     <!-- IA -->
     <div class="sk sa">
-      <!-- Claude: Anthropic logo aproximado -->
+      <!-- Claude / Anthropic (iconify logos) -->
       <div class="sk-logo">
-        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="20" cy="20" r="18" fill="#CC785C"/>
-          <text x="20" y="26" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="serif">C</text>
+        <svg viewBox="0 0 256 257" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#D97757" d="m50.228 170.321l50.357-28.257l.843-2.463l-.843-1.361h-2.462l-8.426-.518l-28.775-.778l-24.952-1.037l-24.175-1.296l-6.092-1.297L0 125.796l.583-3.759l5.12-3.434l7.324.648l16.202 1.101l24.304 1.685l17.629 1.037l26.118 2.722h4.148l.583-1.685l-1.426-1.037l-1.101-1.037l-25.147-17.045l-27.22-18.017l-14.258-10.37l-7.713-5.25l-3.888-4.925l-1.685-10.758l7-7.713l9.397.649l2.398.648l9.527 7.323l20.35 15.75L94.817 91.9l3.889 3.24l1.555-1.102l.195-.777l-1.75-2.917l-14.453-26.118l-15.425-26.572l-6.87-11.018l-1.814-6.61c-.648-2.723-1.102-4.991-1.102-7.778l7.972-10.823L71.42 0l10.63 1.426l4.472 3.888l6.61 15.101l10.694 23.786l16.591 32.34l4.861 9.592l2.592 8.879l.973 2.722h1.685v-1.556l1.36-18.211l2.528-22.36l2.463-28.776l.843-8.1l4.018-9.722l7.971-5.25l6.222 2.981l5.12 7.324l-.713 4.73l-3.046 19.768l-5.962 30.98l-3.889 20.739h2.268l2.593-2.593l10.499-13.934l17.628-22.036l7.778-8.749l9.073-9.657l5.833-4.601h11.018l8.1 12.055l-3.628 12.443l-11.342 14.388l-9.398 12.184l-13.48 18.147l-8.426 14.518l.778 1.166l2.01-.194l30.46-6.481l16.462-2.982l19.637-3.37l8.88 4.148l.971 4.213l-3.5 8.62l-20.998 5.184l-24.628 4.926l-36.682 8.685l-.454.324l.519.648l16.526 1.555l7.065.389h17.304l32.21 2.398l8.426 5.574l5.055 6.805l-.843 5.184l-12.962 6.611l-17.498-4.148l-40.83-9.721l-14-3.5h-1.944v1.167l11.666 11.406l21.387 19.314l26.767 24.887l1.36 6.157l-3.434 4.86l-3.63-.518l-23.526-17.693l-9.073-7.972l-20.545-17.304h-1.36v1.814l4.73 6.935l25.017 37.59l1.296 11.536l-1.814 3.76l-6.481 2.268l-7.13-1.297l-14.647-20.544l-15.1-23.138l-12.185-20.739l-1.49.843l-7.194 77.448l-3.37 3.953l-7.778 2.981l-6.48-4.925l-3.436-7.972l3.435-15.749l4.148-20.544l3.37-16.333l3.046-20.285l1.815-6.74l-.13-.454l-1.49.194l-15.295 20.999l-23.267 31.433l-18.406 19.702l-4.407 1.75l-7.648-3.954l.713-7.064l4.277-6.286l25.47-32.405l15.36-20.092l9.917-11.6l-.065-1.686h-.583L44.07 198.125l-12.055 1.555l-5.185-4.86l.648-7.972l2.463-2.593l20.35-13.999z"/>
         </svg>
       </div>
       <div class="sk-name">CLAUDE CODE</div><span class="sk-tag">IA</span>
     </div>
     <div class="sk sa">
-      <!-- Gemini logo -->
+      <!-- Google Gemini (simple-icons) -->
       <div class="sk-logo">
-        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 24 24" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="gGem" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#4285F4"/>
               <stop offset="100%" stop-color="#A259FF"/>
             </linearGradient>
           </defs>
-          <path d="M20 4 C20 4 24 14 36 20 C24 26 20 36 20 36 C20 36 16 26 4 20 C16 14 20 4 20 4Z" fill="url(#gGem)"/>
+          <path fill="url(#gGem)" d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68q.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58a12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68q-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96q2.19.93 3.81 2.55t2.55 3.81"/>
         </svg>
       </div>
       <div class="sk-name">GEMINI</div><span class="sk-tag">IA</span>
     </div>
-    <div class="sk sa">
-      <!-- ChatGPT logo -->
+    <!-- HERRAMIENTAS -->
+    <div class="sk st">
+      <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"></div>
+      <div class="sk-name">REACT</div><span class="sk-tag">HERRAMIENTA</span>
+    </div>
+    <div class="sk st">
+      <!-- Amazon Web Services (simple-icons) -->
       <div class="sk-logo">
-        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="20" cy="20" r="18" fill="#10A37F"/>
-          <path d="M20 10 C14 10 10 14 10 20 C10 23 11.5 25.5 14 27 L13 30 L17 28 C18 28.4 19 28.5 20 28.5 C26 28.5 30 24.5 30 20 C30 14 26 10 20 10Z" fill="white" opacity=".9"/>
+        <svg viewBox="0 0 24 24" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#FF9900" d="M6.763 10.036q.002.446.088.71c.064.176.144.368.256.576c.04.063.056.127.056.183q.002.12-.152.24l-.503.335a.4.4 0 0 1-.208.072q-.12-.002-.239-.112a2.5 2.5 0 0 1-.287-.375a6 6 0 0 1-.248-.471q-.934 1.101-2.347 1.101c-.67 0-1.205-.191-1.596-.574q-.588-.575-.59-1.533c0-.678.239-1.23.726-1.644c.487-.415 1.133-.623 1.955-.623c.272 0 .551.024.846.064c.296.04.6.104.918.176v-.583q-.001-.909-.375-1.277c-.255-.248-.686-.367-1.3-.367c-.28 0-.568.031-.863.103q-.443.106-.862.272a2 2 0 0 1-.28.104a.5.5 0 0 1-.127.023q-.168.002-.168-.247v-.391c0-.128.016-.224.056-.28a.6.6 0 0 1 .224-.167a4.6 4.6 0 0 1 1.005-.36a4.8 4.8 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647q.66.645.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144a1.8 1.8 0 0 0 .758-.51a1.3 1.3 0 0 0 .272-.512c.047-.191.08-.423.08-.694v-.335a7 7 0 0 0-.735-.136a6 6 0 0 0-.75-.048c-.535 0-.926.104-1.19.32c-.263.215-.39.518-.39.917c0 .375.095.655.295.846c.191.2.47.296.838.296m6.41.862c-.144 0-.24-.024-.304-.08c-.064-.048-.12-.16-.168-.311L7.586 5.55a1.4 1.4 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783q.227-.001.31.08c.065.048.113.16.16.312l1.342 5.284l1.245-5.284q.058-.24.151-.312a.55.55 0 0 1 .32-.08h.638c.152 0 .256.025.32.08c.063.048.12.16.151.312l1.261 5.348l1.381-5.348q.074-.24.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2c0 .04-.009.08-.017.128a1 1 0 0 1-.056.2l-1.923 6.17q-.072.24-.168.311a.5.5 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08c-.063-.056-.119-.16-.15-.32l-1.238-5.148l-1.23 5.14c-.04.16-.087.264-.15.32c-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143c-.399-.096-.71-.2-.918-.32c-.128-.071-.215-.151-.247-.223a.6.6 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247q.072 0 .144.024c.048.016.12.048.2.08q.408.181.878.279c.319.064.63.096.95.096c.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .415-.758a.78.78 0 0 0-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.9 1.9 0 0 1-.4-1.158q0-.502.216-.886c.144-.255.335-.479.575-.654c.24-.184.51-.32.83-.415c.32-.096.655-.136 1.006-.136c.175 0 .359.008.535.032c.183.024.35.056.518.088q.24.058.455.127q.216.072.336.144a.7.7 0 0 1 .24.2a.43.43 0 0 1 .071.263v.375q-.002.254-.184.256a.8.8 0 0 1-.303-.096a3.65 3.65 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223s-.375.383-.375.71c0 .224.08.416.24.567c.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767s.367.702.367 1.117c0 .343-.072.655-.207.926a2.2 2.2 0 0 1-.583.703c-.248.2-.543.343-.886.447c-.36.111-.734.167-1.142.167m1.509 3.88c-2.626 1.94-6.442 2.969-9.722 2.969c-4.598 0-8.74-1.7-11.87-4.526c-.247-.223-.024-.527.272-.351c3.384 1.963 7.559 3.153 11.877 3.153c2.914 0 6.114-.607 9.06-1.852c.439-.2.814.287.383.607m1.094-1.246c-.336-.43-2.22-.207-3.074-.103c-.255.032-.295-.192-.063-.36c1.5-1.053 3.967-.75 4.254-.399c.287.36-.08 2.826-1.485 4.007c-.215.184-.423.088-.327-.151c.32-.79 1.03-2.57.695-2.994"/>
         </svg>
       </div>
-      <div class="sk-name">CHAT GPT</div><span class="sk-tag">IA</span>
+      <div class="sk-name">AWS</div><span class="sk-tag">HERRAMIENTA</span>
     </div>
-
-    <!-- HERRAMIENTAS -->
     <div class="sk st">
       <!-- N8N logo -->
       <div class="sk-logo">
@@ -647,7 +650,7 @@ footer{
 
     <div class="sk st">
       <div class="sk-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
-      <div class="sk-name">Git</div><span class="sk-tag">Herramienta</span>
+      <div class="sk-name">Git</div><span class="sk-tag">HERRAMIENTA</span>
     </div>
   </div>
 </section>
