@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carlos González Laines — Portafolio</title>
+<meta name="description" content="Portafolio de Carlos González Laines, ingeniero de software enfocado en Inteligencia Artificial y desarrollo web.">
+<meta name="theme-color" content="#0d0d1a">
+<link rel="icon" href="assets/img/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 /* =============================================
@@ -40,6 +47,14 @@ body::before{
     radial-gradient(ellipse 60% 30% at 90% 100%,rgba(201, 10, 10, 0.555) 0%,transparent 50%),
     repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.025) 39px,rgba(255,255,255,0.025) 40px),
     repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.025) 39px,rgba(255,255,255,0.025) 40px);
+}
+
+/* =============================================
+   ICONOS SVG (sprite #i-* al inicio de <body>)
+   ============================================= */
+.ic{
+  width:1em;height:1em;display:inline-block;vertical-align:-.13em;
+  fill:currentColor;flex-shrink:0;
 }
 
 /* =============================================
@@ -129,6 +144,8 @@ nav{
   cursor:pointer;transition:all .15s;text-decoration:none;display:inline-block;
 }
 .btn-o:hover{border-color:var(--yellow);background:rgba(255,203,5,0.1);transform:translate(-2px,-2px);}
+.btn-r,.btn-o{display:inline-flex;align-items:center;gap:8px;}
+.btn-r .ic,.btn-o .ic{width:11px;height:11px;}
 
 /* TRAINER CARD */
 .tcard{
@@ -148,16 +165,21 @@ nav{
   background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,0.08) 6px,rgba(0,0,0,0.08) 7px);
 }
 .avatar{
-  width:80px;height:80px;border-radius:50%;
-  background:rgba(0,0,0,0.4);border:3px solid var(--yellow);
+  width:104px;height:104px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue) 0%,var(--red) 100%);
+  border:3px solid var(--yellow);
   display:flex;align-items:center;justify-content:center;
-  font-size:36px;margin:0 auto 10px;position:relative;z-index:1;
+  margin:0 auto 10px;position:relative;z-index:1;
+  overflow:hidden;box-shadow:0 0 0 4px rgba(13,13,26,0.5);
 }
+.avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;display:block;position:relative;z-index:1;}
+.avatar .ic{width:40px;height:40px;color:rgba(255,255,255,0.7);position:absolute;z-index:0;}
 .tcard-name{font-family:var(--pixel);font-size:9px;color:var(--yellow);position:relative;z-index:1;}
 .tcard-body{padding:16px 20px;}
 .trow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
 .tlabel{font-family:var(--tech);font-size:10px;color:var(--mono);letter-spacing:1px;}
 .tval{font-family:var(--body);font-size:14px;font-weight:700;color:var(--white);}
+.tval .ic{width:13px;height:13px;color:var(--yellow);vertical-align:-2px;margin-right:2px;}
 .divider{height:1px;background:var(--border);margin:10px 0;}
 .stat-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
 .sname{font-family:var(--tech);font-size:9px;color:var(--mono);width:44px;}
@@ -190,8 +212,9 @@ nav{
   background:var(--panel);border:1px solid var(--border);padding:36px;position:relative;
 }
 .about-box::before{
-  content:'▶';font-family:var(--pixel);font-size:8px;color:var(--yellow);
-  position:absolute;top:16px;left:16px;opacity:.5;
+  content:'';position:absolute;top:16px;left:16px;opacity:.6;
+  width:12px;height:12px;background-repeat:no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23FFCB05' d='M4 2l10 6-10 6z'/%3E%3C/svg%3E");
 }
 .dialogue{
   font-family:var(--body);font-size:17px;color:rgba(255,255,255,0.8);
@@ -234,13 +257,45 @@ nav{
 .so .sk-tag{background:rgba(255, 0, 212, 0.3);color:#fbff00;border:1px solid rgba(255, 0, 221, 0.541);}
 
 /* =============================================
-   PROYECTOS
+   PROYECTOS — CARRUSEL
    ============================================= */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
+.carousel{position:relative;outline:none;}
+.carousel:focus-visible{box-shadow:0 0 0 2px rgba(255,203,5,0.5);}
+.car-viewport{position:relative;overflow:hidden;padding:3px 3px 6px;}
+.car-viewport::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.16) 0,rgba(0,0,0,0.16) 1px,transparent 1px,transparent 3px);
+  opacity:.45;
+}
+.car-track{display:flex;transition:transform .55s cubic-bezier(.85,.02,.12,1);will-change:transform;}
+.car-slide{min-width:100%;padding:5px 6px;display:flex;}
+.car-bar{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-top:22px;flex-wrap:wrap;
+}
+.car-btn{
+  width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  background:var(--panel);border:2px solid var(--border);color:var(--yellow);
+  cursor:pointer;transition:all .15s;padding:0;
+}
+.car-btn:hover{border-color:var(--yellow);background:rgba(255,203,5,0.1);transform:translateY(-2px);}
+.car-btn .ic{width:15px;height:15px;}
+.car-dots{display:flex;gap:9px;align-items:center;}
+.dot{
+  width:11px;height:11px;padding:0;cursor:pointer;transition:all .2s;
+  background:var(--border);border:1px solid var(--border2);
+}
+.dot:hover{border-color:var(--yellow);}
+.dot.on{background:var(--yellow);border-color:var(--yellow);box-shadow:0 0 9px rgba(255,203,5,0.6);}
+.car-count{
+  font-family:var(--tech);font-size:12px;color:var(--mono);
+  letter-spacing:2px;min-width:66px;text-align:center;
+}
+
 .proj-card{
   background:var(--panel);border:1px solid var(--border);
   padding:28px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
-  text-decoration:none;color:inherit;display:block;
+  text-decoration:none;color:inherit;display:block;width:100%;
 }
 .proj-card::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
@@ -252,19 +307,28 @@ nav{
   border-color:var(--yellow);transform:translate(-2px,-4px);
   box-shadow:4px 6px 0 rgba(204,0,0,0.35);background:var(--panel2);
 }
-.proj-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.proj-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:10px;}
 .proj-num{font-family:var(--tech);font-size:15px;color:var(--red2);}
 .proj-badge{
   font-family:var(--pixel);font-size:8px;padding:4px 10px;
   background:rgba(0,201,110,0.15);color:var(--green);border:1px solid rgba(0,201,110,0.4);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
 }
+.proj-badge .ic{width:9px;height:9px;}
 .proj-badge.wip{background:rgba(255,203,5,0.1);color:var(--yellow);border-color:rgba(255,203,5,0.3);}
-.proj-icon-wrap{margin-bottom:14px;}
-.proj-icon-wrap img{width:56px;height:56px;object-fit:contain;border-radius:8px;}
+.proj-icon-wrap{margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.proj-icon-wrap img{
+  width:56px;height:56px;object-fit:contain;border-radius:8px;flex-shrink:0;
+}
+.proj-icon-wrap .plate{
+  background:#f4f4ff;padding:7px;border:1px solid var(--border2);border-radius:8px;
+}
 .proj-icon-fallback{
   width:56px;height:56px;background:var(--panel2);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:28px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;border-radius:8px;
+  color:var(--yellow);flex-shrink:0;
 }
+.proj-icon-fallback .ic{width:28px;height:28px;}
 .proj-title{
   font-family:var(--pixel);font-size:10px;color:var(--yellow);
   margin-bottom:12px;line-height:1.8;
@@ -283,6 +347,11 @@ nav{
   font-family:var(--pixel);font-size:8px;color:var(--blue2);
   display:inline-flex;align-items:center;gap:6px;
   border-bottom:1px solid rgba(108,132,240,0.3);padding-bottom:2px;
+}
+.proj-link .ic{width:10px;height:10px;}
+@media(max-width:680px){
+  .proj-card{padding:22px;}
+  .car-viewport{padding:0;}
 }
 
 /* =============================================
@@ -332,11 +401,29 @@ footer{
   .contact-box{padding:32px 20px;}
   .ct-title{font-size:9px;}
   .skill-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));}
-  .proj-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
+
+<!-- SPRITE DE ICONOS SVG: reemplaza a todos los emojis/símbolos del sitio -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+  <symbol id="i-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3.2A3.8 3.8 0 1111.8 8 3.8 3.8 0 018 4.2z"/><path d="M8 6.3A1.7 1.7 0 109.7 8 1.7 1.7 0 008 6.3z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 .9l2 4.2 4.6.6-3.3 3.2.8 4.6L8 11.4 3.9 13.5l.8-4.6L1.4 5.7 6 5.1z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 16 16"><path d="M8 0l1.5 6.5L16 8l-6.5 1.5L8 16l-1.5-6.5L0 8l6.5-1.5z"/></symbol>
+  <symbol id="i-external" viewBox="0 0 16 16"><path d="M1.5 4h4v2h-2v6h6v-2h2v4h-10z"/><path d="M8 2h6v6h-2V5.4L6.6 10.8 5.2 9.4 10.6 4H8z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 16 16"><path d="M1 3h14v10H1V3zm1.6 1.6v.8l5.4 3.6 5.4-3.6v-.8H2.6zM2.6 7.2v4.2h10.8V7.2L8 10.8z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.62-2.8 5.64-5.48 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.03-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 16 16"><path d="M3 1h6l4 4v10H3V1z"/><path d="M9 1.6V5.4h3.4z" fill="#1a1a35"/><path d="M5 7.5h6v1.5H5zm0 3h6V12H5z" fill="#1a1a35"/></symbol>
+  <symbol id="i-school" viewBox="0 0 16 16"><path d="M1 4.2L8 1l7 3.2-7 3.2z"/><path d="M3 7v4.4h3.2V7zm6.8 0v4.4H13V7z"/><path d="M6.4 10.2h3.2V15H6.4z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 16 16"><path d="M5.4 2.4L0 8l5.4 5.6 1.3-1.3L2.6 8l3.9-4.3zM10.6 2.4L9.3 3.7 13.4 8l-4.1 4.3 1.3 1.3L16 8z"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 16 16"><path d="M9.6 1.6L3.2 8l6.4 6.4 1.3-1.3L5.8 8l5.1-5.1z"/></symbol>
+  <symbol id="i-chev-r" viewBox="0 0 16 16"><path d="M6.4 1.6L12.8 8l-6.4 6.4-1.3-1.3L10.2 8 5.1 2.9z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 16 16"><path d="M8 1.6a3.4 3.4 0 110 6.8 3.4 3.4 0 010-6.8z"/><path d="M8 9.4c3.4 0 6.2 1.9 6.2 4.3V15H1.8v-1.3c0-2.4 2.8-4.3 6.2-4.3z"/></symbol>
+</svg>
+
 <div class="wrap">
 
 <!-- ==================== NAV ==================== -->
@@ -365,21 +452,28 @@ footer{
       Construyo soluciones que conectan código con el futuro.
     </p>
     <div class="hero-btns">
-      <a class="btn-r" href="#projects">▶ PROYECTOS</a>
-      <a class="btn-o" href="#contact">◉ CONTACTO</a>
+      <a class="btn-r" href="#projects"><svg class="ic"><use href="#i-play"/></svg>PROYECTOS</a>
+      <a class="btn-o" href="#contact"><svg class="ic"><use href="#i-target"/></svg>CONTACTO</a>
     </div>
   </div>
 
   <!-- TRAINER CARD -->
   <div class="tcard">
     <div class="tcard-top">
-      <div class="avatar">👨‍💻</div>
+      <!-- Para cambiar tu foto: reemplaza assets/img/yo-480.webp y yo-480.jpg -->
+      <div class="avatar">
+        <svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>
+        <picture>
+          <source srcset="assets/img/yo-480.webp" type="image/webp">
+          <img src="assets/img/yo-480.jpg" alt="Foto de Carlos González Laines" width="480" height="480">
+        </picture>
+      </div>
       <div class="tcard-name">LAIN.DEV</div>
     </div>
     <div class="tcard-body">
       <div class="trow"><span class="tlabel">UBICACIÓN</span><span class="tval">Toluca, MX</span></div>
       <div class="trow"><span class="tlabel">ESPECIALIDAD</span><span class="tval">Backend &amp; Desarrollo web</span></div>
-      <div class="trow"><span class="tlabel">NIVEL</span><span class="tval">⭐ AVANZADO</span></div>
+      <div class="trow"><span class="tlabel">NIVEL</span><span class="tval"><svg class="ic"><use href="#i-star"/></svg>AVANZADO</span></div>
       <div class="divider"></div>
       <div class="stat-row">
         <span class="sname">CÓDIGO</span>
@@ -562,9 +656,10 @@ footer{
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  PARA AGREGAR UN PROYECTO:                                   ║
-  ║  Copia un bloque <a class="proj-card"> ... </a>              ║
-  ║  Actualiza: href, proj-num, título, descripción,             ║
-  ║  tags y el badge (PRODUCCIÓN / EN DESARROLLO).               ║
+  ║  Copia un bloque <div class="car-slide"> ... </div>          ║
+  ║  y actualiza: href, proj-num, título, descripción,           ║
+  ║  tags, logo y el badge (PRODUCCIÓN / GITHUB).                 ║
+  ║  El carrusel se avanza solo cada 4 s.                        ║
   ╚══════════════════════════════════════════════════════════════╝
 -->
 <section class="section reveal" id="projects">
@@ -574,96 +669,202 @@ footer{
     <div class="sec-line"></div>
   </div>
 
-  <div class="proj-grid">
+  <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carrusel" aria-label="Proyectos">
+    <div class="car-viewport">
+      <div class="car-track">
 
-    <!-- PROYECTO 1: Instituto Kambes -->
-    <a class="proj-card" href="https://institutokambes.com" target="_blank" rel="noopener">
-      <div class="proj-top">
-        <span class="proj-num">#001</span>
-        <span class="proj-badge">✦ PRODUCCIÓN</span>
-      </div>
-      <div class="proj-icon-wrap">
-        <!-- Puedes reemplazar este src por el logo real del sitio -->
-        <div class="proj-icon-fallback">🎓</div>
-      </div>
-      <h3 class="proj-title">INSTITUTO KAMBES</h3>
-      <p class="proj-desc">
-        Sitio web institucional en producción para el Instituto Kambes. Plataforma educativa con información académica, oferta de programas y presencia digital completa para la institución.
-      </p>
-      <div class="proj-tags">
-        <span class="proj-tag">HTML</span>
-        <span class="proj-tag">CSS</span>
-        <span class="proj-tag">WEB</span>
-      </div>
-      <span class="proj-link">↗ institutokambes.com</span>
-    </a>
+        <!-- #001 LA 5TA AVENIDA — logo: assets/img/logos/la5taavenida.png -->
+        <div class="car-slide">
+          <a class="proj-card" href="https://la5taavenida.online" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#001</span>
+              <span class="proj-badge"><svg class="ic"><use href="#i-spark"/></svg>PRODUCCIÓN</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <span class="plate"><img src="assets/img/logos/la5taavenida.png" alt="Logo de La 5ta Avenida" loading="lazy"></span>
+            </div>
+            <h3 class="proj-title">LA 5TA AVENIDA</h3>
+            <p class="proj-desc">
+              Sitio web y sistema de gestión de citas para el salón de belleza La 5ta Avenida: landing con servicios, precios, promociones y horarios, agenda de citas en línea para el cliente y panel de administración de citas y clientes.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">SITIO WEB</span>
+              <span class="proj-tag">GESTIÓN DE CITAS</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>la5taavenida.online</span>
+          </a>
+        </div>
 
-    <!-- PROYECTO 2: Autocompletado de Constancias -->
-    <a class="proj-card" href="https://github.com/Laineess/Autocompletado_De_Constancias" target="_blank" rel="noopener">
-      <div class="proj-top">
-        <span class="proj-num">#002</span>
-        <span class="proj-badge wip">⌥ GITHUB</span>
-      </div>
-      <div class="proj-icon-wrap">
-        <div class="proj-icon-fallback">📄</div>
-      </div>
-      <h3 class="proj-title">AUTOCOMPLETADO DE CONSTANCIAS</h3>
-      <p class="proj-desc">
-        Programa de apoyo para control escolar de la UAEMex que auto-rellena constancias de alumnos usando procesamiento de texto con Python. Automatiza tareas administrativas repetitivas.
-      </p>
-      <div class="proj-tags">
-        <span class="proj-tag">PYTHON</span>
-        <span class="proj-tag">NLP</span>
-        <span class="proj-tag">AUTOMATIZACIÓN</span>
-      </div>
-      <span class="proj-link">↗ Ver en GitHub</span>
-    </a>
+        <!-- #002 PRETTY FACE'S BEAUTY CENTER — logo: assets/img/logos/prettyfaces.jpg -->
+        <div class="car-slide">
+          <a class="proj-card" href="https://prettyfacesbeautycenter.com" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#002</span>
+              <span class="proj-badge"><svg class="ic"><use href="#i-spark"/></svg>PRODUCCIÓN</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <img src="assets/img/logos/prettyfaces.jpg" alt="Logo de Pretty Face's Beauty Center" loading="lazy">
+            </div>
+            <h3 class="proj-title">PRETTY FACE'S BEAUTY CENTER</h3>
+            <p class="proj-desc">
+              Sistema de gestión completo para un centro de estética en salud capilar, cuidado de la piel y mejoramiento estético: sitio público, panel de administración de servicios y clientes, y emisión de tickets y recibos.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">SITIO WEB</span>
+              <span class="proj-tag">PANEL ADMIN</span>
+              <span class="proj-tag">SPA</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>prettyfacesbeautycenter.com</span>
+          </a>
+        </div>
 
-    <!-- PROYECTO 3: ControlKambes -->
-    <a class="proj-card" href="https://github.com/Laineess/ControlKambes" target="_blank" rel="noopener">
-      <div class="proj-top">
-        <span class="proj-num">#003</span>
-        <span class="proj-badge wip">⌥ GITHUB</span>
-      </div>
-      <div class="proj-icon-wrap">
-        <div class="proj-icon-fallback">🏫</div>
-      </div>
-      <h3 class="proj-title">CONTROL KAMBES</h3>
-      <p class="proj-desc">
-        Portal de control escolar diseñado para universidades particulares. Sistema de gestión académica que centraliza el control administrativo y escolar de la institución.
-      </p>
-      <div class="proj-tags">
-        <span class="proj-tag">WEB</span>
-        <span class="proj-tag">GESTIÓN</span>
-        <span class="proj-tag">EDUCACIÓN</span>
-      </div>
-      <span class="proj-link">↗ Ver en GitHub</span>
-    </a>
+        <!-- #003 BURGER GRILL CORNER — logo: assets/img/logos/burguergrill.png -->
+        <div class="car-slide">
+          <a class="proj-card" href="https://www.burguergrillcorner.com" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#003</span>
+              <span class="proj-badge"><svg class="ic"><use href="#i-spark"/></svg>PRODUCCIÓN</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <span class="plate"><img src="assets/img/logos/burguergrill.png" alt="Logo de Burger Grill Corner" loading="lazy"></span>
+            </div>
+            <h3 class="proj-title">BURGER GRILL CORNER</h3>
+            <p class="proj-desc">
+              Sitio web en producción para un restaurante de hamburguesas y parrilla: menú con precios e imágenes de cada platillo, specials de la casa, sección de terraza, galería del lugar y contacto directo.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">SITIO WEB</span>
+              <span class="proj-tag">MENÚ</span>
+              <span class="proj-tag">RESTAURANTE</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>burguergrillcorner.com</span>
+          </a>
+        </div>
 
-    <!--
-      ╔══════════════════════════════════════╗
-      ║  AGREGA MÁS PROYECTOS AQUÍ ABAJO     ║
-      ║  Copia el bloque <a class="proj-card"> ║
-      ╚══════════════════════════════════════╝
+        <!-- #004 INSTITUTO KAMBES — logo: assets/img/logos/kambes.jpg -->
+        <div class="car-slide">
+          <a class="proj-card" href="https://institutokambes.com" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#004</span>
+              <span class="proj-badge"><svg class="ic"><use href="#i-spark"/></svg>PRODUCCIÓN</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <img src="assets/img/logos/kambes.jpg" alt="Logo del Instituto Kambes" loading="lazy">
+            </div>
+            <h3 class="proj-title">INSTITUTO KAMBES</h3>
+            <p class="proj-desc">
+              Sitio web institucional en producción para el Instituto Kambes. Plataforma educativa con información académica, oferta de programas y presencia digital completa para la institución.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">HTML</span>
+              <span class="proj-tag">CSS</span>
+              <span class="proj-tag">WEB</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>institutokambes.com</span>
+          </a>
+        </div>
 
-    <a class="proj-card" href="TU_URL" target="_blank" rel="noopener">
-      <div class="proj-top">
-        <span class="proj-num">#004</span>
-        <span class="proj-badge">✦ PRODUCCIÓN</span>
-      </div>
-      <div class="proj-icon-wrap">
-        <div class="proj-icon-fallback">🤖</div>
-      </div>
-      <h3 class="proj-title">NOMBRE DEL PROYECTO</h3>
-      <p class="proj-desc">Descripción del proyecto aquí.</p>
-      <div class="proj-tags">
-        <span class="proj-tag">PYTHON</span>
-        <span class="proj-tag">IA</span>
-      </div>
-      <span class="proj-link">↗ Ver proyecto</span>
-    </a>
-    -->
+        <!-- #005 LISEO / LICEO TECNOLÓGICO — logo: assets/img/logos/liceo.png -->
+        <div class="car-slide">
+          <a class="proj-card" href="https://liseoportal.com" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#005</span>
+              <span class="proj-badge"><svg class="ic"><use href="#i-spark"/></svg>PRODUCCIÓN</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <span class="plate"><img src="assets/img/logos/liceo.png" alt="Logo del Liceo Tecnológico" loading="lazy"></span>
+            </div>
+            <h3 class="proj-title">LICEO TECNOLÓGICO</h3>
+            <p class="proj-desc">
+              Portal de control escolar para una institución educativa privada que ofrece preparatoria acelerada y cursos de regularización en línea. Incluye acceso institucional por correo y contraseña, gestión académica, reportes en PDF y pagos con MercadoPago.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">DJANGO</span>
+              <span class="proj-tag">MYSQL</span>
+              <span class="proj-tag">PORTAL ESCOLAR</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>liseoportal.com</span>
+          </a>
+        </div>
 
+        <!-- #006 TRACKPOOL — logo: assets/img/logos/trackpool.png -->
+        <div class="car-slide">
+          <a class="proj-card" href="http://18.116.27.200/login" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#006</span>
+              <span class="proj-badge wip"><svg class="ic"><use href="#i-code"/></svg>PoC</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <span class="plate"><img src="assets/img/logos/trackpool.png" alt="Logo de Trackpool" loading="lazy"></span>
+            </div>
+            <h3 class="proj-title">TRACKPOOL · ATRACCIÓN DE TALENTO</h3>
+            <p class="proj-desc">
+              PoC del proceso de Atracción de Talento de El Puerto de Liverpool: de la requisición de una vacante hasta la carta de oferta, con semáforo de evaluación, entrevistas por checklist, historial auditable y notificaciones en cada etapa. SPA en React con API REST en FastAPI.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">REACT</span>
+              <span class="proj-tag">FASTAPI</span>
+              <span class="proj-tag">API REST</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>18.116.27.200</span>
+          </a>
+        </div>
+
+        <!-- #007 AUTOCOMPLETADO DE CONSTANCIAS -->
+        <div class="car-slide">
+          <a class="proj-card" href="https://github.com/Laineess/Autocompletado_De_Constancias" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#007</span>
+              <span class="proj-badge wip"><svg class="ic"><use href="#i-github"/></svg>GITHUB</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <div class="proj-icon-fallback"><svg class="ic"><use href="#i-doc"/></svg></div>
+            </div>
+            <h3 class="proj-title">AUTOCOMPLETADO DE CONSTANCIAS</h3>
+            <p class="proj-desc">
+              Programa de apoyo para control escolar de la UAEMex que auto-rellena constancias de alumnos usando procesamiento de texto con Python. Automatiza tareas administrativas repetitivas.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">PYTHON</span>
+              <span class="proj-tag">NLP</span>
+              <span class="proj-tag">AUTOMATIZACIÓN</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>Ver en GitHub</span>
+          </a>
+        </div>
+
+        <!-- #008 CONTROL KAMBES -->
+        <div class="car-slide">
+          <a class="proj-card" href="https://github.com/Laineess/ControlKambes" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <span class="proj-num">#008</span>
+              <span class="proj-badge wip"><svg class="ic"><use href="#i-github"/></svg>GITHUB</span>
+            </div>
+            <div class="proj-icon-wrap">
+              <div class="proj-icon-fallback"><svg class="ic"><use href="#i-school"/></svg></div>
+            </div>
+            <h3 class="proj-title">CONTROL KAMBES</h3>
+            <p class="proj-desc">
+              Portal de control escolar diseñado para universidades particulares. Sistema de gestión académica que centraliza el control administrativo y escolar de la institución.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">WEB</span>
+              <span class="proj-tag">GESTIÓN</span>
+              <span class="proj-tag">EDUCACIÓN</span>
+            </div>
+            <span class="proj-link"><svg class="ic"><use href="#i-external"/></svg>Ver en GitHub</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="car-bar">
+      <button class="car-btn" type="button" data-prev aria-label="Proyecto anterior"><svg class="ic"><use href="#i-chev-l"/></svg></button>
+      <div class="car-dots"></div>
+      <span class="car-count">01 / 08</span>
+      <button class="car-btn" type="button" data-next aria-label="Proyecto siguiente"><svg class="ic"><use href="#i-chev-r"/></svg></button>
+    </div>
   </div>
 </section>
 
@@ -685,12 +886,12 @@ footer{
     <h2 class="ct-title">¿LISTO PARA<br>COLABORAR?</h2>
     <p class="ct-sub">Elige a Carlos como tu desarrollador</p>
     <div class="ct-links">
-      <!-- ↓ Cambia por tu email real -->
-      <a class="btn-r" href="mailto:carlosg93918@gmail.com">◉ EMAIL</a>
-      <!-- ↓ Cambia por tu URL de GitHub -->
-      <a class="btn-o" href="https://github.com/Laineess" target="_blank" rel="noopener">⌥ GITHUB</a>
-      <!-- ↓ Cambia por tu URL de LinkedIn -->
-      <a class="btn-o" href="https://www.linkedin.com/in/carlos-gonzález-laines-09527a284/" target="_blank" rel="noopener">◈ LINKEDIN</a>
+      <!-- Cambia por tu email real -->
+      <a class="btn-r" href="mailto:carlosg93918@gmail.com"><svg class="ic"><use href="#i-mail"/></svg>EMAIL</a>
+      <!-- Cambia por tu URL de GitHub -->
+      <a class="btn-o" href="https://github.com/Laineess" target="_blank" rel="noopener"><svg class="ic"><use href="#i-github"/></svg>GITHUB</a>
+      <!-- Cambia por tu URL de LinkedIn -->
+      <a class="btn-o" href="https://www.linkedin.com/in/carlos-gonz%C3%A1lez-laines-undefined-09527a284/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BWaZIic7jSf2%2FSm6jUGVBBA%3D%3D" target="_blank" rel="noopener"><svg class="ic"><use href="#i-linkedin"/></svg>LINKEDIN</a>
     </div>
   </div>
 </section>
@@ -698,8 +899,7 @@ footer{
 <!-- ==================== FOOTER ==================== -->
 <footer>
   <div class="ft">
-    © 2025 CARLOS GONZÁLEZ LAINES · ALL RIGHTS RESERVED<br>
-    BUILT WITH ♥ CODE &amp; CAFFEINE
+    © 2025 CARLOS GONZÁLEZ LAINES · ALL RIGHTS RESERVED Ldevs<br>
   </div>
   <div class="balls">
     <div class="ball"></div>
@@ -722,6 +922,72 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 document.querySelectorAll('.sk-logo img').forEach(img => {
   img.onerror = function(){ this.style.display='none'; };
 });
+
+/* Fallback: si falla la foto de perfil, se muestra el icono de usuario */
+const avatar = document.querySelector('.avatar img');
+if (avatar) avatar.onerror = function(){ this.style.display='none'; };
+
+/* ==================== CARRUSEL DE PROYECTOS ==================== */
+const car = document.getElementById('carousel');
+if (car) {
+  const track   = car.querySelector('.car-track');
+  const slides  = [...car.querySelectorAll('.car-slide')];
+  const dotsBox = car.querySelector('.car-dots');
+  const counter = car.querySelector('.car-count');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DELAY   = 4000;
+  const total   = slides.length;
+  let idx = 0, timer = null, paused = false;
+
+  const pad = n => String(n).padStart(2, '0');
+  const dotEls = slides.map((_, n) => {
+    const d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'dot';
+    d.setAttribute('aria-label', 'Ir al proyecto ' + (n + 1));
+    d.addEventListener('click', () => { go(n); restart(); });
+    dotsBox.appendChild(d);
+    return d;
+  });
+
+  function render() {
+    track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+    dotEls.forEach((d, n) => d.classList.toggle('on', n === idx));
+    counter.textContent = pad(idx + 1) + ' / ' + pad(total);
+  }
+  function go(n)  { idx = (n + total) % total; render(); }
+  function next() { go(idx + 1); }
+  function prev() { go(idx - 1); }
+  function start(){ if (reduced) return; timer = setInterval(() => { if (!paused) next(); }, DELAY); }
+  function stop() { clearInterval(timer); timer = null; }
+  function restart(){ stop(); start(); }
+
+  car.querySelector('[data-next]').addEventListener('click', () => { next(); restart(); });
+  car.querySelector('[data-prev]').addEventListener('click', () => { prev(); restart(); });
+
+  car.addEventListener('mouseenter', () => paused = true);
+  car.addEventListener('mouseleave', () => paused = false);
+  car.addEventListener('focusin',  () => paused = true);
+  car.addEventListener('focusout', () => paused = false);
+  document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+
+  car.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { next(); restart(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft')  { prev(); restart(); e.preventDefault(); }
+  });
+
+  let x0 = null;
+  car.addEventListener('pointerdown', e => { x0 = e.clientX; });
+  car.addEventListener('pointerup', e => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0;
+    if (Math.abs(dx) > 45) { dx < 0 ? next() : prev(); restart(); }
+    x0 = null;
+  });
+
+  render();
+  start();
+}
 </script>
 </body>
 </html>
