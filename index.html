@@ -405,8 +405,14 @@ footer{
    RESPONSIVE
    ============================================= */
 @media(max-width:680px){
-  .hero{grid-template-columns:1fr;}
-  .tcard{display:none;}
+  .hero{grid-template-columns:1fr;gap:32px;margin-bottom:60px;}
+  .tcard{width:100%;max-width:360px;margin:0 auto;}
+  .avatar{height:200px;}
+  .tcard-body{padding:14px 16px;}
+  .trow{flex-wrap:wrap;gap:2px 8px;}
+  .tlabel{font-size:9px;}
+  .tval{font-size:13px;}
+  .tcard-id{font-size:10px;padding:10px 16px;letter-spacing:1px;}
   .hero-name{font-size:12px;}
   .contact-box{padding:32px 20px;}
   .ct-title{font-size:9px;}
